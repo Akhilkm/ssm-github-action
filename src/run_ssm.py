@@ -10,7 +10,7 @@ print("branch is ", branch)
 
 try:
     response = client.send_command(
-        Targets=[{'Key': 'tag:Name', 'Values': ['akhil-test']}],
+        Targets=[{'Key': 'tag:deploy', 'Values': ['ssm']}],
         DocumentName='AWS-RunShellScript',
         TimeoutSeconds=600,
         Comment='deploy',
