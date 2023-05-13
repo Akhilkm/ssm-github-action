@@ -44,20 +44,19 @@ env:
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-jobs:
-  S3PackageUpload:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
-          role-session-name: samplerolesession
-          aws-region: "ap-southeast-1"
-      # Upload a file to AWS s3
-      - name:  Copy index.html to s3
-        id: get-square
-        run: |
-          aws s3 ls
+runs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Git clone the repository
+      uses: actions/checkout@v3
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
+        role-session-name: samplerolesession
+        aws-region: "ap-southeast-1"
+    # Upload a file to AWS s3
+    - name:  Copy index.html to s3
+      id: get-square
+      run: |
+        aws s3 ls
