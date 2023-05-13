@@ -24,3 +24,5 @@ response = client.send_command(
     Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"],"executionTimeout":["123"]},
     CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
 )
+
+print(response)
