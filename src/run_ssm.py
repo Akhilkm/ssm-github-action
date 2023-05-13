@@ -5,7 +5,8 @@ import time
 import signal
 
 client = boto3.client('ssm')
-
+branch = os.getenv('GITHUB_REF')
+print("branch is ", branch)
 
 try:
     response = client.send_command(
