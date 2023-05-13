@@ -5,7 +5,7 @@ on:
   push
 env:
   TAG_NAME : "akhil-test"
-  AWS_REGION : "ap-southeast-2"
+  AWS_REGION : "ap-southeast-1"
 # permission can be added at job level or workflow level    
 permissions:
       id-token: write   # This is required for requesting the JWT
