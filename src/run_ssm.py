@@ -21,8 +21,10 @@ response = client.send_command(
     TimeoutSeconds=123,
     Comment='deploy',
 
-    Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"],"executionTimeout":["123"]},
+    Parameters={"workingDirectory":["/home/ec2-user/"],"executionTimeout":["123"],"commands":["#!/bin/bash","","runtime=\"5 minute\"","endtime=$(date -ud \"$runtime\" +%s)","","while [[ $(date -u +%s) -le $endtime ]]","do"," echo \"Time Now: `date +%H:%M:%S`\""," echo \"Sleeping for 10 seconds\""," sleep 10","done"]},
+    # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"],"executionTimeout":["123"]},
     CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
 )
 
-print(response)
+print(response["Command"]["CommandId"])
+
