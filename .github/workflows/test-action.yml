@@ -22,7 +22,14 @@ jobs:
           role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+        shell: bash
       # Upload a file to AWS s3
-      - name:  Copy index.html to s3
+      - name:  list s3 file
         run: |
-          aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+          python3 ./get_num_square.py
