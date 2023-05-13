@@ -11,7 +11,7 @@ permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
 jobs:
-  S3PackageUpload:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -30,5 +30,6 @@ jobs:
         run: pip install -r requirements.txt
         shell: bash
       - name:  run_ssm
+        timeout-minutes: 15
         run: |
           python3 ./src/run_ssm.py
