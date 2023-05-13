@@ -14,7 +14,7 @@ try:
         TimeoutSeconds=600,
         Comment='deploy',
 
-        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","runtime=\"5 minute\"","endtime=$(date -ud \"$runtime\" +%s)","","while [[ $(date -u +%s) -le $endtime ]]","do"," echo \"Time Now: `date +%H:%M:%S`\""," echo \"Sleeping for 10 seconds\""," sleep 10","done"]},
+        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","runtime=\"2 minute\"","endtime=$(date -ud \"$runtime\" +%s)","","while [[ $(date -u +%s) -le $endtime ]]","do"," echo \"Time Now: `date +%H:%M:%S`\""," echo \"Sleeping for 10 seconds\""," sleep 10","done"]},
         # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"]},
         CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
     )
@@ -25,6 +25,7 @@ except Exception as e:
 print("Started SSM command with commandid:", response["Command"]["CommandId"])
 
 print("\n\nlogs....\n\n")
+time.sleep(2)
 p = subprocess.Popen("awslogs get akhil-test --region ap-southeast-1 ALL --watch", shell=True)
 while True:
     time.sleep(10)
