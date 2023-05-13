@@ -1,5 +1,13 @@
 # src/get_num_square.py
 import os
+import boto3
+
+s3_client = boto3.client('s3')
+
+objects = s3_client.list_objects_v2(Bucket='stackvidhya')
+
+for obj in objects['Contents']:
+    print(obj['Key'])
 
 # get the input and convert it to int
 num = os.environ.get("INPUT_NUM")
