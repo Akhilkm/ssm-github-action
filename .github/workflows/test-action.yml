@@ -32,4 +32,4 @@ jobs:
       # Upload a file to AWS s3
       - name:  list s3 file
         run: |
-          python3 ./get_num_square.py
+          ls -al
