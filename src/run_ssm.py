@@ -30,7 +30,7 @@ while True:
     time.sleep(10)
     status = client.list_commands(CommandId=response["Command"]["CommandId"])['Commands'][0]["Status"]
     if status == 'InProgress' or status == 'Pending':
-        print("still running")
+        continue
     elif status == "Failed":
         os.kill(p.pid, signal.SIGKILL)
         print("the job got failed, please contact the administrator")
