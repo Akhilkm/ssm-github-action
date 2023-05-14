@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
