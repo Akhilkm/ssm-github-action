@@ -9,6 +9,7 @@ branch = os.getenv('GITHUB_REF')
 print("branch is ", branch)
 region = os.getenv('AWS_REGION')
 print(region)
+print(os.getenv("TARGET_BRANCH"))
 
 try:
     response = client.send_command(
