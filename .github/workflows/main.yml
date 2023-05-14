@@ -32,7 +32,7 @@ jobs:
       - name: Run Test
         run: npm test
       - name: Build
-        run: npm run build
+        run: npm run build && zip -r dist.zip build/
       - name: copy to s3
         run: aws s3 sync ./build s3://github-actions-build/build
   deploy:
