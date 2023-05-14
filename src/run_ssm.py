@@ -7,6 +7,8 @@ import signal
 client = boto3.client('ssm')
 branch = os.getenv('GITHUB_REF')
 print("branch is ", branch)
+region = os.getenv('AWS_REGION')
+print(region)
 
 try:
     response = client.send_command(
@@ -27,7 +29,7 @@ print("Started SSM command with commandid:", response["Command"]["CommandId"])
 
 print("\n\nlogs....\n\n")
 time.sleep(2)
-p = subprocess.Popen("awslogs", "get", "akhil-test", "--region", "ap-southeast-1" "ALL" "--watch", shell=False)
+p = subprocess.Popen("awslogs get akhil-test --region ap-southeast-1 ALL --watch", shell=True)
 while True:
     time.sleep(10)
     status = client.list_commands(CommandId=response["Command"]["CommandId"])['Commands'][0]["Status"]
