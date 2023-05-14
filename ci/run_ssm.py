@@ -5,11 +5,7 @@ import time
 import signal
 
 client = boto3.client('ssm')
-branch = os.getenv('GITHUB_REF')
-print("branch is ", branch)
 region = os.getenv('AWS_REGION')
-print(region)
-print(os.getenv("TARGET_BRANCH"))
 
 try:
     response = client.send_command(
@@ -18,7 +14,7 @@ try:
         TimeoutSeconds=600,
         Comment='deploy',
 
-        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","echo \"downloading build from s3\"","aws s3 cp s3://github-actions-build/build/dist.zip .","","unzip dist.zip","rm -rf /opt/mer/blush_dist/dist","cp -rf dist /opt/mer/blush_dist/","ls -la /opt/mer/blush_dist","du -s /opt/mer/blush_dist/dist"],"workingDirectory":["/home/ec2-user/"]},
+        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","echo \"downloading build from s3\"","aws s3 cp s3://github-actions-build/build/dist.zip .","","unzip dist.zip","rm -rf /opt/mer/blush_dist/dist","echo hello","cp -rf dist /opt/mer/blush_dist/","ls -la /opt/mer/blush_dist","du -s /opt/mer/blush_dist/dist"],"workingDirectory":["/home/ec2-user/"]},
         # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"]},
         CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
     )
