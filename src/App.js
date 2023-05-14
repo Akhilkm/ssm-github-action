@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <p>
-            Hello main branch!
+            Hello test branch!
           </p>
         </header>
       </div>
