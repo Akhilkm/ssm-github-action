@@ -2,7 +2,7 @@
 # The workflow Creates static website using aws s3
 name: deployment
 on:
-  push
+  workflow_dispatch:
 env:
   TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
