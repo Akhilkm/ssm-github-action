@@ -18,7 +18,7 @@ try:
         TimeoutSeconds=600,
         Comment='deploy',
 
-        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","echo \"downloading build from s3\"","aws s3 cp s3://github-actions-build/build/dist.zip","","unzip dist.zip","rm -rf /opt/mer/blush_dist/dist","cp -rf dist /opt/mer/blush_dist/","ls -la /opt/mer/blush_dist","du -s /opt/mer/blush_dist/dist"],"workingDirectory":["/home/ec2-user/"]},
+        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","echo \"downloading build from s3\"","aws s3 cp s3://github-actions-build/build/dist.zip .","","unzip dist.zip","rm -rf /opt/mer/blush_dist/dist","cp -rf dist /opt/mer/blush_dist/","ls -la /opt/mer/blush_dist","du -s /opt/mer/blush_dist/dist"],"workingDirectory":["/home/ec2-user/"]},
         # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"]},
         CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
     )
