@@ -8,13 +8,12 @@ on:
         type: choice
         description: select instance ids
         options: 
-        - i-06fc1c8dc36bd1870
-        - i-06fc1c8dc36bd1871
-        - i-06fc1c8dc36bd1872
+        - i-0b1722af1faf0ca9c
 env:
   TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
   TARGET_BRANCH : TARGET_BRANCH
+  INSTANCE_ID: "${{ github.event.inputs.instance_ids }}"
 # permission can be added at job level or workflow level    
 permissions:
       id-token: write   # This is required for requesting the JWT
@@ -31,12 +30,12 @@ jobs:
           role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
-      - name: Use Node.js 16.x
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 12
       - name: Install dependancies
-        run: echo "${{ github.event.inputs.instance_ids }}"; exit(1)
+        run: echo "$GITHUB_REF_NAME"; exit 1;
         # run: npm install
       - name: Run Test
         run: npm test
