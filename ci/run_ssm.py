@@ -6,6 +6,9 @@ import signal
 
 client = boto3.client('ssm')
 region = os.getenv('AWS_REGION')
+branch = os.getenv('GITHUB_REF_NAME')
+print(branch)
+exit(0)
 
 try:
     response = client.send_command(
@@ -15,7 +18,7 @@ try:
         TimeoutSeconds=600,
         Comment='deploy',
 
-        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","","echo \"downloading build from s3\"","rm -rf dist*","aws s3 cp s3://github-actions-build/build/dist.zip .","echo \"unzipping dist.zip\"","unzip dist.zip","echo \"removing old dist\"","rm -rf /usr/share/nginx/html/dist","echo \"copy new dist\"","cp -rf dist /usr/share/nginx/html/","echo \"listing files in blush_dist\"","ls -la /usr/share/nginx/html","echo \"finding size of blush_dist\"","du -s /usr/share/nginx/html/dist"],"workingDirectory":["/home/ec2-user/"]},
+        Parameters={"workingDirectory":["/home/ec2-user/"],"commands":["#!/bin/bash","su darren","source /home/darren/scripts/.env","echo \"Working Environment = $UMI_ENV\"","cd /opt/mer/blush","git fetch --all --tags","echo \"branch is \""+branch,"git checkout "+branch,"git branch","npm ci","npm run build","npm run test","exit 0"],"workingDirectory":["/home/darren/"]},
         # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"]},
         CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
     )
