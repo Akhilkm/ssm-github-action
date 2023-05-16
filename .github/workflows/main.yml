@@ -13,6 +13,7 @@ env:
   TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
   INSTANCE_ID: "${{ github.event.inputs.instance_id }}"
+  LOG_GROUP_NAME: "akhil-test"
 # permission can be added at job level or workflow level    
 permissions:
       id-token: write   # This is required for requesting the JWT

@@ -8,6 +8,7 @@ client = boto3.client('ssm')
 region = os.getenv('AWS_REGION')
 branch = os.getenv('GITHUB_REF_NAME')
 instance_id = os.getenv('INSTANCE_ID')
+log_group_name = os.getenv('LOG_GROUP_NAME')
 
 try:
     response = client.send_command(
@@ -18,8 +19,7 @@ try:
         Comment='deploy',
 
         Parameters={"workingDirectory":["/home/darren/"],"commands":["#!/bin/bash","su darren","source /home/darren/scripts/.env","echo \"Working Environment = $UMI_ENV\"","cd /opt/mer/blush","git fetch --all --tags","echo \"branch is \""+branch,"git checkout "+branch,"git branch","npm ci","npm run build","npm run test","exit 0"]},
-        # Parameters={"commands":["ls -al; sleep 60;  echo \"hello\""],"workingDirectory":["/home/ec2-user/"]},
-        CloudWatchOutputConfig={'CloudWatchLogGroupName': 'akhil-test', 'CloudWatchOutputEnabled': True}
+        CloudWatchOutputConfig={'CloudWatchLogGroupName': log_group_name, 'CloudWatchOutputEnabled': True}
     )
 except Exception as e:
         print(e)
