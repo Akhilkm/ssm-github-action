@@ -16,7 +16,7 @@ exit(1)
 try:
     response = client.send_command(
         # Targets=[{"Key":"tag:deploy","Values":["ssm"]}],
-        InstanceIds=[]
+        InstanceIds=[],
         DocumentName='AWS-RunShellScript',
         TimeoutSeconds=600,
         Comment='deploy',
