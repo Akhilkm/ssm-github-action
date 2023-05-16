@@ -8,9 +8,10 @@ client = boto3.client('ssm')
 region = os.getenv('AWS_REGION')
 branch = os.getenv('GITHUB_REF_NAME')
 instance_id = os.getenv('INSTANCE_ID')
+print("environment variables")
 print(branch)
 print(instance_id)
-exit(0)
+exit(1)
 
 try:
     response = client.send_command(
