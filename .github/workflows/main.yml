@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 12
       - name: Install dependancies
-        run: echo $GITHUB_REF_NAME; exit 1;
+        run: ls -al; echo $GITHUB_REF_NAME; exit 1;
         # run: npm install
       - name: Run Test
         run: npm test
