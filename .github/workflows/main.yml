@@ -10,7 +10,7 @@ on:
         options: 
         - i-0b1722af1faf0ca9c
 env:
-  TAG_NAME : "akhil-test"
+  # TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
   INSTANCE_ID: "${{ github.event.inputs.instance_id }}"
   LOG_GROUP_NAME: "akhil-test"
