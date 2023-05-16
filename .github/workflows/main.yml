@@ -36,7 +36,7 @@ jobs:
           node-version: 12
       - name: Install dependancies
         # run: ls -al; echo $GITHUB_REF_NAME; exit 1;
-        run: echo "Building from $GITHUB_REF_NAME" && npm ci
+        run: echo "Building from"; echo $GITHUB_REF_NAME; npm ci
       # - name: Run Test
       #   run: npm test
       # - name: Build
