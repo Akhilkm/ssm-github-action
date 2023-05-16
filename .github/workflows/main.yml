@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       instance_ids:
-        type: multi-choice
+        type: choice
         description: select instance ids
         options: 
         - i-06fc1c8dc36bd1870
