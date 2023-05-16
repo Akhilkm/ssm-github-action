@@ -3,6 +3,14 @@
 name: deployment
 on:
   workflow_dispatch:
+    inputs:
+      instance_ids:
+        type: multi-choice
+        description: select instance ids
+        options: 
+        - i-06fc1c8dc36bd1870
+        - i-06fc1c8dc36bd1871
+        - i-06fc1c8dc36bd1872
 env:
   TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
@@ -28,7 +36,8 @@ jobs:
         with:
           node-version: 16
       - name: Install dependancies
-        run: npm install
+        run: echo "${{ github.event.inputs.instance_ids }}"; exit(1)
+        # run: npm install
       - name: Run Test
         run: npm test
       - name: Build
