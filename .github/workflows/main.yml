@@ -9,8 +9,6 @@ on:
         description: select instance ids
         options: 
         - i-06fc1c8dc36bd1870
-        - i-06fc1c8dc36bd1871
-        - i-06fc1c8dc36bd1872
 env:
   TAG_NAME : "akhil-test"
   AWS_REGION : "ap-southeast-1"
@@ -36,8 +34,7 @@ jobs:
         with:
           node-version: 16
       - name: Install dependancies
-        run: echo "${{ github.event.inputs.instance_ids }}"; exit(1)
-        # run: npm install
+        run: npm ci
       - name: Run Test
         run: npm test
       - name: Build
@@ -67,3 +64,17 @@ jobs:
         timeout-minutes: 15
         run: |
           python3 ./ci/run_ssm.py
+  ami_rotate:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::772371761711:role/github-actions-role
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
+      - name: rotate-ami
+        run: ./ci/rotate_ami.sh
